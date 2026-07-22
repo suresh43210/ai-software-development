@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe - Modern Interactive Game</title>
+  <meta name="description" content="A sleek, modern glassmorphic Tic Tac Toe game with Single Player vs AI (Minimax), 2-Player local mode, score tracking, and sound effects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-globes">
+    <div class="globe globe-1"></div>
+    <div class="globe globe-2"></div>
+    <div class="globe globe-3"></div>
+  </div>
+
+  <main class="game-container">
+    <!-- Header Controls -->
+    <header class="game-header">
+      <div class="title-group">
+        <h1 class="game-title">TIC TAC <span class="accent-text">TOE</span></h1>
+      </div>
+      <button id="sound-toggle" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+        <svg id="sound-icon-on" class="sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="sound-icon-off" class="sound-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+          <path d="M9 9l3 3m-3 3l6-6"></path>
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Game Configuration & Mode Selection -->
+    <section class="controls-card">
+      <div class="mode-selector" role="radiogroup" aria-label="Game Mode">
+        <button id="mode-ai" class="mode-btn active" role="radio" aria-checked="true">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+            <circle cx="12" cy="5" r="2"></circle>
+            <path d="M12 7v4"></path>
+            <line x1="8" y1="16" x2="8" y2="16"></line>
+            <line x1="16" y1="16" x2="16" y2="16"></line>
+          </svg>
+          vs AI
+        </button>
+        <button id="mode-pvp" class="mode-btn" role="radio" aria-checked="false">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          2 Player
+        </button>
+      </div>
+
+      <div id="ai-difficulty-wrapper" class="difficulty-wrapper">
+        <label for="difficulty-select" class="difficulty-label">AI Level:</label>
+        <div class="select-container">
+          <select id="difficulty-select" class="difficulty-select">
+            <option value="impossible" selected>Unbeatable (Minimax)</option>
+            <option value="easy">Casual (Easy)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard">
+      <div class="score-card x-score">
+        <span class="score-label" id="label-x">PLAYER (X)</span>
+        <span id="score-x" class="score-value">0</span>
+      </div>
+      <div class="score-card tie-score">
+        <span class="score-label">TIES</span>
+        <span id="score-ties" class="score-value">0</span>
+      </div>
+      <div class="score-card o-score">
+        <span class="score-label" id="label-o">AI (O)</span>
+        <span id="score-o" class="score-value">0</span>
+      </div>
+    </section>
+
+    <!-- Status Banner -->
+    <div id="status-banner" class="status-banner" aria-live="polite">
+      <span id="status-text">Player X's Turn</span>
+    </div>
+
+    <!-- 3x3 Game Board Grid -->
+    <div class="board-wrapper">
+      <div id="board" class="board" role="grid" aria-label="Tic Tac Toe Board">
+        <button class="cell" data-index="0" aria-label="Cell 1"></button>
+        <button class="cell" data-index="1" aria-label="Cell 2"></button>
+        <button class="cell" data-index="2" aria-label="Cell 3"></button>
+        <button class="cell" data-index="3" aria-label="Cell 4"></button>
+        <button class="cell" data-index="4" aria-label="Cell 5"></button>
+        <button class="cell" data-index="5" aria-label="Cell 6"></button>
+        <button class="cell" data-index="6" aria-label="Cell 7"></button>
+        <button class="cell" data-index="7" aria-label="Cell 8"></button>
+        <button class="cell" data-index="8" aria-label="Cell 9"></button>
+
+        <!-- SVG strike line overlay -->
+        <svg id="winning-strike" class="winning-strike" viewBox="0 0 300 300">
+          <line id="strike-line" x1="0" y1="0" x2="0" y2="0" stroke="url(#strike-gradient)" stroke-width="8" stroke-linecap="round" />
+          <defs>
+            <linearGradient id="strike-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f2fe" />
+              <stop offset="100%" stop-color="#4facfe" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <footer class="action-footer">
+      <button id="restart-btn" class="action-btn primary-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6"></path>
+          <path d="M1 20v-6h6"></path>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        New Round
+      </button>
+      <button id="reset-scores-btn" class="action-btn secondary-btn">
+        Reset Scores
+      </button>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Basic HTML Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background: #f7f7f7;
+        color: #333;
+      }
+      header {
+        margin-bottom: 1.5rem;
+      }
+      main {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      }
+      footer {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome</h1>
+      <p>A basic HTML page template.</p>
+    </header>
+    <main>
+      <section>
+        <h2>About</h2>
+        <p>This is a simple starter page you can modify.</p>
+      </section>
+      <section>
+        <h2>Example</h2>
+        <p>Try editing this file to add your content.</p>
+        <button id="greet">Click me</button>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026</p>
+    </footer>
+    <script>
+      document.getElementById("greet").addEventListener("click", function () {
+        alert("Hello!");
+      });
+    </script>
+  </body>
+</html>
