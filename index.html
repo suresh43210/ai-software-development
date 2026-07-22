@@ -3,137 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tic Tac Toe - Modern Interactive Game</title>
-  <meta name="description" content="A sleek, modern glassmorphic Tic Tac Toe game with Single Player vs AI (Minimax), 2-Player local mode, score tracking, and sound effects.">
+  <title>Pure HTML & CSS Tic Tac Toe (No JS)</title>
+  <meta name="description" content="A sleek, modern glassmorphic Tic Tac Toe game built using 100% Pure HTML and CSS with zero JavaScript.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Floating ambient globes -->
   <div class="background-globes">
     <div class="globe globe-1"></div>
     <div class="globe globe-2"></div>
     <div class="globe globe-3"></div>
   </div>
 
-  <main class="game-container">
-    <!-- Header Controls -->
-    <header class="game-header">
-      <div class="title-group">
+  <form class="game-form">
+    <main class="game-container">
+      <header class="game-header">
         <h1 class="game-title">TIC TAC <span class="accent-text">TOE</span></h1>
-      </div>
-      <button id="sound-toggle" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
-        <svg id="sound-icon-on" class="sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <svg id="sound-icon-off" class="sound-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="1" y1="1" x2="23" y2="23"></line>
-          <path d="M9 9l3 3m-3 3l6-6"></path>
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        </svg>
-      </button>
-    </header>
+        <span class="badge-pure-css">100% Pure CSS</span>
+      </header>
 
-    <!-- Game Configuration & Mode Selection -->
-    <section class="controls-card">
-      <div class="mode-selector" role="radiogroup" aria-label="Game Mode">
-        <button id="mode-ai" class="mode-btn active" role="radio" aria-checked="true">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-            <circle cx="12" cy="5" r="2"></circle>
-            <path d="M12 7v4"></path>
-            <line x1="8" y1="16" x2="8" y2="16"></line>
-            <line x1="16" y1="16" x2="16" y2="16"></line>
-          </svg>
-          vs AI
-        </button>
-        <button id="mode-pvp" class="mode-btn" role="radio" aria-checked="false">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-          2 Player
-        </button>
+      <!-- Hidden Radio Inputs for 9 cells (X and O for each cell) -->
+      <!-- Cell 1 -->
+      <input type="radio" id="x1" name="c1" class="input-x cell-1-x">
+      <input type="radio" id="o1" name="c1" class="input-o cell-1-o">
+
+      <!-- Cell 2 -->
+      <input type="radio" id="x2" name="c2" class="input-x cell-2-x">
+      <input type="radio" id="o2" name="c2" class="input-o cell-2-o">
+
+      <!-- Cell 3 -->
+      <input type="radio" id="x3" name="c3" class="input-x cell-3-x">
+      <input type="radio" id="o3" name="c3" class="input-o cell-3-o">
+
+      <!-- Cell 4 -->
+      <input type="radio" id="x4" name="c4" class="input-x cell-4-x">
+      <input type="radio" id="o4" name="c4" class="input-o cell-4-o">
+
+      <!-- Cell 5 -->
+      <input type="radio" id="x5" name="c5" class="input-x cell-5-x">
+      <input type="radio" id="o5" name="c5" class="input-o cell-5-o">
+
+      <!-- Cell 6 -->
+      <input type="radio" id="x6" name="c6" class="input-x cell-6-x">
+      <input type="radio" id="o6" name="c6" class="input-o cell-6-o">
+
+      <!-- Cell 7 -->
+      <input type="radio" id="x7" name="c7" class="input-x cell-7-x">
+      <input type="radio" id="o7" name="c7" class="input-o cell-7-o">
+
+      <!-- Cell 8 -->
+      <input type="radio" id="x8" name="c8" class="input-x cell-8-x">
+      <input type="radio" id="o8" name="c8" class="input-o cell-8-o">
+
+      <!-- Cell 9 -->
+      <input type="radio" id="x9" name="c9" class="input-x cell-9-x">
+      <input type="radio" id="o9" name="c9" class="input-o cell-9-o">
+
+      <!-- Status Banner -->
+      <div class="status-banner">
+        <span class="status-text turn-x-text">Player X's Turn (Cyan)</span>
+        <span class="status-text turn-o-text">Player O's Turn (Red)</span>
+        <span class="status-text win-x-text">Player X Wins! 🎉</span>
+        <span class="status-text win-o-text">Player O Wins! 🎉</span>
+        <span class="status-text tie-text">It's a Tie! 🤝</span>
       </div>
 
-      <div id="ai-difficulty-wrapper" class="difficulty-wrapper">
-        <label for="difficulty-select" class="difficulty-label">AI Level:</label>
-        <div class="select-container">
-          <select id="difficulty-select" class="difficulty-select">
-            <option value="impossible" selected>Unbeatable (Minimax)</option>
-            <option value="easy">Casual (Easy)</option>
-          </select>
+      <!-- 3x3 Board Grid -->
+      <div class="board-wrapper">
+        <div class="board">
+          <!-- Cell 1 -->
+          <div class="cell cell-1">
+            <label for="x1" class="lbl-x" title="Play X"></label>
+            <label for="o1" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 2 -->
+          <div class="cell cell-2">
+            <label for="x2" class="lbl-x" title="Play X"></label>
+            <label for="o2" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 3 -->
+          <div class="cell cell-3">
+            <label for="x3" class="lbl-x" title="Play X"></label>
+            <label for="o3" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 4 -->
+          <div class="cell cell-4">
+            <label for="x4" class="lbl-x" title="Play X"></label>
+            <label for="o4" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 5 -->
+          <div class="cell cell-5">
+            <label for="x5" class="lbl-x" title="Play X"></label>
+            <label for="o5" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 6 -->
+          <div class="cell cell-6">
+            <label for="x6" class="lbl-x" title="Play X"></label>
+            <label for="o6" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 7 -->
+          <div class="cell cell-7">
+            <label for="x7" class="lbl-x" title="Play X"></label>
+            <label for="o7" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 8 -->
+          <div class="cell cell-8">
+            <label for="x8" class="lbl-x" title="Play X"></label>
+            <label for="o8" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Cell 9 -->
+          <div class="cell cell-9">
+            <label for="x9" class="lbl-x" title="Play X"></label>
+            <label for="o9" class="lbl-o" title="Play O"></label>
+            <div class="symbol symbol-x">
+              <svg viewBox="0 0 100 100"><path d="M 20 20 L 80 80 M 80 20 L 20 80" /></svg>
+            </div>
+            <div class="symbol symbol-o">
+              <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="32" /></svg>
+            </div>
+          </div>
+
+          <!-- Winning Strike Lines -->
+          <div class="strike-line strike-row-1"></div>
+          <div class="strike-line strike-row-2"></div>
+          <div class="strike-line strike-row-3"></div>
+          <div class="strike-line strike-col-1"></div>
+          <div class="strike-line strike-col-2"></div>
+          <div class="strike-line strike-col-3"></div>
+          <div class="strike-line strike-diag-1"></div>
+          <div class="strike-line strike-diag-2"></div>
         </div>
       </div>
-    </section>
 
-    <!-- Scoreboard -->
-    <section class="scoreboard">
-      <div class="score-card x-score">
-        <span class="score-label" id="label-x">PLAYER (X)</span>
-        <span id="score-x" class="score-value">0</span>
-      </div>
-      <div class="score-card tie-score">
-        <span class="score-label">TIES</span>
-        <span id="score-ties" class="score-value">0</span>
-      </div>
-      <div class="score-card o-score">
-        <span class="score-label" id="label-o">AI (O)</span>
-        <span id="score-o" class="score-value">0</span>
-      </div>
-    </section>
-
-    <!-- Status Banner -->
-    <div id="status-banner" class="status-banner" aria-live="polite">
-      <span id="status-text">Player X's Turn</span>
-    </div>
-
-    <!-- 3x3 Game Board Grid -->
-    <div class="board-wrapper">
-      <div id="board" class="board" role="grid" aria-label="Tic Tac Toe Board">
-        <button class="cell" data-index="0" aria-label="Cell 1"></button>
-        <button class="cell" data-index="1" aria-label="Cell 2"></button>
-        <button class="cell" data-index="2" aria-label="Cell 3"></button>
-        <button class="cell" data-index="3" aria-label="Cell 4"></button>
-        <button class="cell" data-index="4" aria-label="Cell 5"></button>
-        <button class="cell" data-index="5" aria-label="Cell 6"></button>
-        <button class="cell" data-index="6" aria-label="Cell 7"></button>
-        <button class="cell" data-index="7" aria-label="Cell 8"></button>
-        <button class="cell" data-index="8" aria-label="Cell 9"></button>
-
-        <!-- SVG strike line overlay -->
-        <svg id="winning-strike" class="winning-strike" viewBox="0 0 300 300">
-          <line id="strike-line" x1="0" y1="0" x2="0" y2="0" stroke="url(#strike-gradient)" stroke-width="8" stroke-linecap="round" />
-          <defs>
-            <linearGradient id="strike-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#00f2fe" />
-              <stop offset="100%" stop-color="#4facfe" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <footer class="action-footer">
-      <button id="restart-btn" class="action-btn primary-btn">
-        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M23 4v6h-6"></path>
-          <path d="M1 20v-6h6"></path>
-          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-        </svg>
-        New Round
-      </button>
-      <button id="reset-scores-btn" class="action-btn secondary-btn">
-        Reset Scores
-      </button>
-    </footer>
-  </main>
-
-  <script src="script.js"></script>
+      <!-- Action Footer -->
+      <footer class="action-footer">
+        <button type="reset" class="action-btn primary-btn">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 4v6h-6"></path>
+            <path d="M1 20v-6h6"></path>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Reset Game
+        </button>
+      </footer>
+    </main>
+  </form>
 </body>
 </html>

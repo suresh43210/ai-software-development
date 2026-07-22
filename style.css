@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Modern Tic Tac Toe - Design System & Stylesheet
+   Pure HTML & CSS Tic Tac Toe - 100% Zero JavaScript
    ========================================================================== */
 
 :root {
@@ -26,15 +26,9 @@
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset & Base Styles */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -53,7 +47,7 @@ body {
   position: relative;
 }
 
-/* Dynamic Ambient Floating Globes */
+/* Background globes */
 .background-globes {
   position: fixed;
   top: 0;
@@ -100,25 +94,26 @@ body {
 }
 
 @keyframes float {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  50% {
-    transform: translate(40px, -50px) scale(1.1);
-  }
-
-  100% {
-    transform: translate(-30px, 30px) scale(0.95);
-  }
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -50px) scale(1.1); }
+  100% { transform: translate(-30px, 30px) scale(0.95); }
 }
 
-/* Main Container */
+/* Hide Radio Inputs */
+.game-form input[type="radio"] {
+  display: none;
+}
+
+.game-form {
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Container */
 .game-container {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 440px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -139,7 +134,7 @@ body {
 }
 
 .game-title {
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: 2px;
   background: linear-gradient(135deg, #ffffff 0%, var(--text-muted) 100%);
@@ -153,171 +148,15 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.icon-btn {
-  background: var(--surface-bg);
-  border: 1px solid var(--surface-border);
-  color: var(--text-main);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.icon-btn:hover {
-  background: var(--surface-hover);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-.sound-icon {
-  width: 20px;
-  height: 20px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* Controls Card */
-.controls-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mode-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 4px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--surface-border);
-}
-
-.mode-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-family: var(--font-family);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 10px 14px;
-  border-radius: calc(var(--radius-md) - 4px);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: var(--transition-normal);
-}
-
-.mode-btn.active {
-  background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.15));
-  color: var(--accent-cyan);
+.badge-pure-css {
+  background: rgba(0, 242, 254, 0.15);
   border: 1px solid rgba(0, 242, 254, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 242, 254, 0.1);
-}
-
-.btn-icon {
-  width: 18px;
-  height: 18px;
-}
-
-.difficulty-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--surface-border);
-  transition: var(--transition-fast);
-}
-
-.difficulty-label {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.select-container {
-  position: relative;
-}
-
-.difficulty-select {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--surface-border);
-  color: var(--text-main);
-  font-family: var(--font-family);
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  outline: none;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.difficulty-select:focus,
-.difficulty-select:hover {
-  border-color: var(--accent-cyan);
-}
-
-.difficulty-select option {
-  background: var(--bg-color);
-  color: var(--text-main);
-}
-
-/* Scoreboard */
-.scoreboard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.score-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-md);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  transition: var(--transition-fast);
-}
-
-.score-card:hover {
-  transform: translateY(-2px);
-}
-
-.x-score {
-  border-bottom: 3px solid var(--color-x);
-}
-
-.tie-score {
-  border-bottom: 3px solid var(--color-tie);
-}
-
-.o-score {
-  border-bottom: 3px solid var(--color-o);
-}
-
-.score-label {
+  color: var(--accent-cyan);
   font-size: 0.75rem;
   font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
   letter-spacing: 0.5px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.score-value {
-  font-size: 1.5rem;
-  font-weight: 800;
 }
 
 /* Status Banner */
@@ -325,36 +164,47 @@ body {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 14px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: var(--text-main);
-  transition: var(--transition-fast);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
-.status-banner.winner-x {
-  background: rgba(0, 242, 254, 0.15);
-  border-color: var(--color-x);
+.status-text {
+  display: none;
+}
+
+/* Default state: Turn X is visible */
+.turn-x-text {
+  display: block;
   color: var(--color-x);
-  box-shadow: 0 0 15px var(--color-x-glow);
 }
 
-.status-banner.winner-o {
-  background: rgba(255, 78, 80, 0.15);
-  border-color: var(--color-o);
+/* Turn Switcher Rules (O's Turn when X count > O count) */
+.game-container:has(.input-x:checked):not(:has(.input-o:checked)) .turn-x-text,
+.game-container:has(.input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked)) .turn-x-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-x-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-x-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-x-text {
+  display: none;
+}
+
+.game-container:has(.input-x:checked):not(:has(.input-o:checked)) .turn-o-text,
+.game-container:has(.input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked)) .turn-o-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-o-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-o-text,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .turn-o-text {
+  display: block;
   color: var(--color-o);
-  box-shadow: 0 0 15px var(--color-o-glow);
 }
 
-.status-banner.tie {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: var(--color-tie);
-  color: var(--color-tie);
-}
-
-/* Game Board */
+/* Grid & Cell Styling */
 .board-wrapper {
   position: relative;
   width: 100%;
@@ -375,185 +225,336 @@ body {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
-  cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  outline: none;
-  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
-.cell:hover:not(.taken) {
+.cell:hover {
   background: var(--surface-hover);
   border-color: rgba(255, 255, 255, 0.25);
   transform: scale(1.02);
 }
 
-.cell.taken {
-  cursor: not-allowed;
+/* Labels (Click Targets) */
+.lbl-x, .lbl-o {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 5;
 }
 
-/* Glowing X and O Markers */
-.cell-symbol {
+/* Default state: X labels active */
+.lbl-x { display: block; }
+.lbl-o { display: none; }
+
+/* Switch to O labels when X count > O count */
+.game-container:has(.input-x:checked):not(:has(.input-o:checked)) .lbl-x,
+.game-container:has(.input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked)) .lbl-x,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-x,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-x,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-x {
+  display: none;
+}
+
+.game-container:has(.input-x:checked):not(:has(.input-o:checked)) .lbl-o,
+.game-container:has(.input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked)) .lbl-o,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-o,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-o,
+.game-container:has(.input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked ~ .input-x:checked):not(:has(.input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked ~ .input-o:checked)) .lbl-o {
+  display: block;
+}
+
+/* Hide labels inside cells that are ALREADY played */
+.game-container:has(#x1:checked) .cell-1 label, .game-container:has(#o1:checked) .cell-1 label,
+.game-container:has(#x2:checked) .cell-2 label, .game-container:has(#o2:checked) .cell-2 label,
+.game-container:has(#x3:checked) .cell-3 label, .game-container:has(#o3:checked) .cell-3 label,
+.game-container:has(#x4:checked) .cell-4 label, .game-container:has(#o4:checked) .cell-4 label,
+.game-container:has(#x5:checked) .cell-5 label, .game-container:has(#o5:checked) .cell-5 label,
+.game-container:has(#x6:checked) .cell-6 label, .game-container:has(#o6:checked) .cell-6 label,
+.game-container:has(#x7:checked) .cell-7 label, .game-container:has(#o7:checked) .cell-7 label,
+.game-container:has(#x8:checked) .cell-8 label, .game-container:has(#o8:checked) .cell-8 label,
+.game-container:has(#x9:checked) .cell-9 label, .game-container:has(#o9:checked) .cell-9 label {
+  display: none !important;
+}
+
+/* Display symbols for played cells */
+.symbol {
   width: 60%;
   height: 60%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
   animation: symbolPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-.symbol-x path {
+.symbol-x svg path {
   stroke: var(--color-x);
   stroke-width: 12;
   stroke-linecap: round;
+  fill: none;
   filter: drop-shadow(0 0 8px var(--color-x-glow));
 }
 
-.symbol-o circle {
+.symbol-o svg circle {
   stroke: var(--color-o);
   stroke-width: 12;
   fill: none;
   filter: drop-shadow(0 0 8px var(--color-o-glow));
 }
 
-/* Hover Preview Symbols */
-.cell:hover:not(.taken)::after {
-  content: '';
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  opacity: 0.15;
-  pointer-events: none;
-}
+/* Show Symbol X or O when checked */
+.game-container:has(#x1:checked) .cell-1 .symbol-x { display: flex; }
+.game-container:has(#o1:checked) .cell-1 .symbol-o { display: flex; }
 
-.board.turn-x .cell:hover:not(.taken)::after {
-  background: radial-gradient(circle, var(--color-x) 20%, transparent 70%);
-}
+.game-container:has(#x2:checked) .cell-2 .symbol-x { display: flex; }
+.game-container:has(#o2:checked) .cell-2 .symbol-o { display: flex; }
 
-.board.turn-o .cell:hover:not(.taken)::after {
-  background: radial-gradient(circle, var(--color-o) 20%, transparent 70%);
-}
+.game-container:has(#x3:checked) .cell-3 .symbol-x { display: flex; }
+.game-container:has(#o3:checked) .cell-3 .symbol-o { display: flex; }
 
-/* Winning Cell Highlight */
-.cell.winning-cell {
-  animation: pulseGlow 1.5s infinite alternate;
-}
+.game-container:has(#x4:checked) .cell-4 .symbol-x { display: flex; }
+.game-container:has(#o4:checked) .cell-4 .symbol-o { display: flex; }
 
-.cell.winning-cell.x-cell {
-  background: rgba(0, 242, 254, 0.12);
-  border-color: var(--color-x);
-}
+.game-container:has(#x5:checked) .cell-5 .symbol-x { display: flex; }
+.game-container:has(#o5:checked) .cell-5 .symbol-o { display: flex; }
 
-.cell.winning-cell.o-cell {
-  background: rgba(255, 78, 80, 0.12);
-  border-color: var(--color-o);
-}
+.game-container:has(#x6:checked) .cell-6 .symbol-x { display: flex; }
+.game-container:has(#o6:checked) .cell-6 .symbol-o { display: flex; }
+
+.game-container:has(#x7:checked) .cell-7 .symbol-x { display: flex; }
+.game-container:has(#o7:checked) .cell-7 .symbol-o { display: flex; }
+
+.game-container:has(#x8:checked) .cell-8 .symbol-x { display: flex; }
+.game-container:has(#o8:checked) .cell-8 .symbol-o { display: flex; }
+
+.game-container:has(#x9:checked) .cell-9 .symbol-x { display: flex; }
+.game-container:has(#o9:checked) .cell-9 .symbol-o { display: flex; }
 
 @keyframes symbolPop {
-  0% {
-    transform: scale(0) rotate(-20deg);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
-@keyframes pulseGlow {
-  0% {
-    transform: scale(1);
-  }
+/* ==========================================================================
+   Winning Combinations & Strike Lines (Pure CSS)
+   ========================================================================== */
 
-  100% {
-    transform: scale(1.04);
-  }
-}
-
-/* SVG Winning Strike Line Overlay */
-.winning-strike {
+.strike-line {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+  box-shadow: 0 0 15px var(--accent-cyan);
+  border-radius: 4px;
+  display: none;
   z-index: 10;
+  animation: strikeDraw 0.4s ease-out forwards;
 }
 
-#strike-line {
-  transition: stroke-dashoffset 0.4s ease-out;
+/* Strike Positions */
+.strike-row-1 { top: 16%; left: 5%; width: 90%; height: 8px; }
+.strike-row-2 { top: 49%; left: 5%; width: 90%; height: 8px; }
+.strike-row-3 { top: 82%; left: 5%; width: 90%; height: 8px; }
+
+.strike-col-1 { top: 5%; left: 16%; width: 8px; height: 90%; }
+.strike-col-2 { top: 5%; left: 49%; width: 8px; height: 90%; }
+.strike-col-3 { top: 5%; left: 82%; width: 8px; height: 90%; }
+
+.strike-diag-1 {
+  top: 50%; left: 5%; width: 120%; height: 8px;
+  transform: translateY(-50%) rotate(45deg);
+  transform-origin: center;
+}
+
+.strike-diag-2 {
+  top: 50%; left: -15%; width: 120%; height: 8px;
+  transform: translateY(-50%) rotate(-45deg);
+  transform-origin: center;
+}
+
+@keyframes strikeDraw {
+  0% { opacity: 0; transform: scaleX(0); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+
+/* ==========================================================================
+   X Win Detection
+   ========================================================================== */
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .strike-row-1,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .strike-row-2,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .strike-row-3,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .strike-col-1,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .strike-col-2,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .strike-col-3,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .strike-diag-1,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .strike-diag-2 {
+  display: block;
+}
+
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .turn-x-text,
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .turn-o-text,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .turn-x-text,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .turn-o-text,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .turn-x-text,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .turn-o-text,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .turn-x-text,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .turn-o-text,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .turn-x-text,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .turn-o-text,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .turn-x-text,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .turn-o-text,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .turn-x-text,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .turn-o-text,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .turn-x-text,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .turn-o-text {
+  display: none !important;
+}
+
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .win-x-text,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .win-x-text,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .win-x-text,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .win-x-text,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .win-x-text,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .win-x-text,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .win-x-text,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .win-x-text {
+  display: block !important;
+  color: var(--color-x);
+}
+
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .status-banner,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .status-banner,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .status-banner,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .status-banner,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .status-banner,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .status-banner,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .status-banner,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .status-banner {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--color-x);
+  box-shadow: 0 0 15px var(--color-x-glow);
+}
+
+/* Disable remaining moves on X Win */
+.game-container:has(#x1:checked):has(#x2:checked):has(#x3:checked) .board,
+.game-container:has(#x4:checked):has(#x5:checked):has(#x6:checked) .board,
+.game-container:has(#x7:checked):has(#x8:checked):has(#x9:checked) .board,
+.game-container:has(#x1:checked):has(#x4:checked):has(#x7:checked) .board,
+.game-container:has(#x2:checked):has(#x5:checked):has(#x8:checked) .board,
+.game-container:has(#x3:checked):has(#x6:checked):has(#x9:checked) .board,
+.game-container:has(#x1:checked):has(#x5:checked):has(#x9:checked) .board,
+.game-container:has(#x3:checked):has(#x5:checked):has(#x7:checked) .board {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   O Win Detection
+   ========================================================================== */
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .strike-row-1,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .strike-row-2,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .strike-row-3,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .strike-col-1,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .strike-col-2,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .strike-col-3,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .strike-diag-1,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .strike-diag-2 {
+  display: block;
+  background: linear-gradient(135deg, var(--accent-coral), var(--accent-orange));
+  box-shadow: 0 0 15px var(--accent-coral);
+}
+
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .turn-x-text,
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .turn-o-text,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .turn-x-text,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .turn-o-text,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .turn-x-text,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .turn-o-text,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .turn-x-text,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .turn-o-text,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .turn-x-text,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .turn-o-text,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .turn-x-text,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .turn-o-text,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .turn-x-text,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .turn-o-text,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .turn-x-text,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .turn-o-text {
+  display: none !important;
+}
+
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .win-o-text,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .win-o-text,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .win-o-text,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .win-o-text,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .win-o-text,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .win-o-text,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .win-o-text,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .win-o-text {
+  display: block !important;
+  color: var(--color-o);
+}
+
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .status-banner,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .status-banner,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .status-banner,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .status-banner,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .status-banner,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .status-banner,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .status-banner,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .status-banner {
+  background: rgba(255, 78, 80, 0.15);
+  border-color: var(--color-o);
+  box-shadow: 0 0 15px var(--color-o-glow);
+}
+
+/* Disable remaining moves on O Win */
+.game-container:has(#o1:checked):has(#o2:checked):has(#o3:checked) .board,
+.game-container:has(#o4:checked):has(#o5:checked):has(#o6:checked) .board,
+.game-container:has(#o7:checked):has(#o8:checked):has(#o9:checked) .board,
+.game-container:has(#o1:checked):has(#o4:checked):has(#o7:checked) .board,
+.game-container:has(#o2:checked):has(#o5:checked):has(#o8:checked) .board,
+.game-container:has(#o3:checked):has(#o6:checked):has(#o9:checked) .board,
+.game-container:has(#o1:checked):has(#o5:checked):has(#o9:checked) .board,
+.game-container:has(#o3:checked):has(#o5:checked):has(#o7:checked) .board {
+  pointer-events: none;
 }
 
 /* Action Footer */
 .action-footer {
   display: flex;
-  gap: 12px;
 }
 
 .action-btn {
-  flex: 1;
+  width: 100%;
   font-family: var(--font-family);
   font-size: 0.95rem;
   font-weight: 700;
-  padding: 12px 18px;
+  padding: 14px 18px;
   border-radius: var(--radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: var(--transition-fast);
+  transition: all 0.2s ease;
   border: none;
-}
-
-.primary-btn {
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
   color: #0b0f19;
   box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
 }
 
-.primary-btn:hover {
+.action-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 242, 254, 0.45);
 }
 
-.secondary-btn {
-  background: var(--surface-bg);
-  border: 1px solid var(--surface-border);
-  color: var(--text-main);
-}
-
-.secondary-btn:hover {
-  background: var(--surface-hover);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .game-container {
-    padding: 20px;
-    gap: 16px;
-  }
-
-  .game-title {
-    font-size: 1.4rem;
-  }
-
-  .scoreboard {
-    gap: 6px;
-  }
-
-  .score-card {
-    padding: 8px;
-  }
-
-  .score-value {
-    font-size: 1.2rem;
-  }
-
-  .board {
-    gap: 8px;
-  }
+.btn-icon {
+  width: 18px;
+  height: 18px;
 }
