@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Pure HTML & CSS Tic Tac Toe - 100% Zero JavaScript
-   ========================================================================== */
-
 :root {
   --bg-color: #0b0f19;
   --surface-bg: rgba(255, 255, 255, 0.04);
@@ -28,7 +24,9 @@
   --radius-lg: 24px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -94,9 +92,17 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, -50px) scale(1.1); }
-  100% { transform: translate(-30px, 30px) scale(0.95); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(40px, -50px) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-30px, 30px) scale(0.95);
+  }
 }
 
 /* Hide Radio Inputs */
@@ -240,7 +246,8 @@ body {
 }
 
 /* Labels (Click Targets) */
-.lbl-x, .lbl-o {
+.lbl-x,
+.lbl-o {
   position: absolute;
   top: 0;
   left: 0;
@@ -251,8 +258,13 @@ body {
 }
 
 /* Default state: X labels active */
-.lbl-x { display: block; }
-.lbl-o { display: none; }
+.lbl-x {
+  display: block;
+}
+
+.lbl-o {
+  display: none;
+}
 
 /* Switch to O labels when X count > O count */
 .game-container:has(.input-x:checked):not(:has(.input-o:checked)) .lbl-x,
@@ -272,15 +284,24 @@ body {
 }
 
 /* Hide labels inside cells that are ALREADY played */
-.game-container:has(#x1:checked) .cell-1 label, .game-container:has(#o1:checked) .cell-1 label,
-.game-container:has(#x2:checked) .cell-2 label, .game-container:has(#o2:checked) .cell-2 label,
-.game-container:has(#x3:checked) .cell-3 label, .game-container:has(#o3:checked) .cell-3 label,
-.game-container:has(#x4:checked) .cell-4 label, .game-container:has(#o4:checked) .cell-4 label,
-.game-container:has(#x5:checked) .cell-5 label, .game-container:has(#o5:checked) .cell-5 label,
-.game-container:has(#x6:checked) .cell-6 label, .game-container:has(#o6:checked) .cell-6 label,
-.game-container:has(#x7:checked) .cell-7 label, .game-container:has(#o7:checked) .cell-7 label,
-.game-container:has(#x8:checked) .cell-8 label, .game-container:has(#o8:checked) .cell-8 label,
-.game-container:has(#x9:checked) .cell-9 label, .game-container:has(#o9:checked) .cell-9 label {
+.game-container:has(#x1:checked) .cell-1 label,
+.game-container:has(#o1:checked) .cell-1 label,
+.game-container:has(#x2:checked) .cell-2 label,
+.game-container:has(#o2:checked) .cell-2 label,
+.game-container:has(#x3:checked) .cell-3 label,
+.game-container:has(#o3:checked) .cell-3 label,
+.game-container:has(#x4:checked) .cell-4 label,
+.game-container:has(#o4:checked) .cell-4 label,
+.game-container:has(#x5:checked) .cell-5 label,
+.game-container:has(#o5:checked) .cell-5 label,
+.game-container:has(#x6:checked) .cell-6 label,
+.game-container:has(#o6:checked) .cell-6 label,
+.game-container:has(#x7:checked) .cell-7 label,
+.game-container:has(#o7:checked) .cell-7 label,
+.game-container:has(#x8:checked) .cell-8 label,
+.game-container:has(#o8:checked) .cell-8 label,
+.game-container:has(#x9:checked) .cell-9 label,
+.game-container:has(#o9:checked) .cell-9 label {
   display: none !important;
 }
 
@@ -311,36 +332,88 @@ body {
 }
 
 /* Show Symbol X or O when checked */
-.game-container:has(#x1:checked) .cell-1 .symbol-x { display: flex; }
-.game-container:has(#o1:checked) .cell-1 .symbol-o { display: flex; }
+.game-container:has(#x1:checked) .cell-1 .symbol-x {
+  display: flex;
+}
 
-.game-container:has(#x2:checked) .cell-2 .symbol-x { display: flex; }
-.game-container:has(#o2:checked) .cell-2 .symbol-o { display: flex; }
+.game-container:has(#o1:checked) .cell-1 .symbol-o {
+  display: flex;
+}
 
-.game-container:has(#x3:checked) .cell-3 .symbol-x { display: flex; }
-.game-container:has(#o3:checked) .cell-3 .symbol-o { display: flex; }
+.game-container:has(#x2:checked) .cell-2 .symbol-x {
+  display: flex;
+}
 
-.game-container:has(#x4:checked) .cell-4 .symbol-x { display: flex; }
-.game-container:has(#o4:checked) .cell-4 .symbol-o { display: flex; }
+.game-container:has(#o2:checked) .cell-2 .symbol-o {
+  display: flex;
+}
 
-.game-container:has(#x5:checked) .cell-5 .symbol-x { display: flex; }
-.game-container:has(#o5:checked) .cell-5 .symbol-o { display: flex; }
+.game-container:has(#x3:checked) .cell-3 .symbol-x {
+  display: flex;
+}
 
-.game-container:has(#x6:checked) .cell-6 .symbol-x { display: flex; }
-.game-container:has(#o6:checked) .cell-6 .symbol-o { display: flex; }
+.game-container:has(#o3:checked) .cell-3 .symbol-o {
+  display: flex;
+}
 
-.game-container:has(#x7:checked) .cell-7 .symbol-x { display: flex; }
-.game-container:has(#o7:checked) .cell-7 .symbol-o { display: flex; }
+.game-container:has(#x4:checked) .cell-4 .symbol-x {
+  display: flex;
+}
 
-.game-container:has(#x8:checked) .cell-8 .symbol-x { display: flex; }
-.game-container:has(#o8:checked) .cell-8 .symbol-o { display: flex; }
+.game-container:has(#o4:checked) .cell-4 .symbol-o {
+  display: flex;
+}
 
-.game-container:has(#x9:checked) .cell-9 .symbol-x { display: flex; }
-.game-container:has(#o9:checked) .cell-9 .symbol-o { display: flex; }
+.game-container:has(#x5:checked) .cell-5 .symbol-x {
+  display: flex;
+}
+
+.game-container:has(#o5:checked) .cell-5 .symbol-o {
+  display: flex;
+}
+
+.game-container:has(#x6:checked) .cell-6 .symbol-x {
+  display: flex;
+}
+
+.game-container:has(#o6:checked) .cell-6 .symbol-o {
+  display: flex;
+}
+
+.game-container:has(#x7:checked) .cell-7 .symbol-x {
+  display: flex;
+}
+
+.game-container:has(#o7:checked) .cell-7 .symbol-o {
+  display: flex;
+}
+
+.game-container:has(#x8:checked) .cell-8 .symbol-x {
+  display: flex;
+}
+
+.game-container:has(#o8:checked) .cell-8 .symbol-o {
+  display: flex;
+}
+
+.game-container:has(#x9:checked) .cell-9 .symbol-x {
+  display: flex;
+}
+
+.game-container:has(#o9:checked) .cell-9 .symbol-o {
+  display: flex;
+}
 
 @keyframes symbolPop {
-  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  0% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -358,29 +431,76 @@ body {
 }
 
 /* Strike Positions */
-.strike-row-1 { top: 16%; left: 5%; width: 90%; height: 8px; }
-.strike-row-2 { top: 49%; left: 5%; width: 90%; height: 8px; }
-.strike-row-3 { top: 82%; left: 5%; width: 90%; height: 8px; }
+.strike-row-1 {
+  top: 16%;
+  left: 5%;
+  width: 90%;
+  height: 8px;
+}
 
-.strike-col-1 { top: 5%; left: 16%; width: 8px; height: 90%; }
-.strike-col-2 { top: 5%; left: 49%; width: 8px; height: 90%; }
-.strike-col-3 { top: 5%; left: 82%; width: 8px; height: 90%; }
+.strike-row-2 {
+  top: 49%;
+  left: 5%;
+  width: 90%;
+  height: 8px;
+}
+
+.strike-row-3 {
+  top: 82%;
+  left: 5%;
+  width: 90%;
+  height: 8px;
+}
+
+.strike-col-1 {
+  top: 5%;
+  left: 16%;
+  width: 8px;
+  height: 90%;
+}
+
+.strike-col-2 {
+  top: 5%;
+  left: 49%;
+  width: 8px;
+  height: 90%;
+}
+
+.strike-col-3 {
+  top: 5%;
+  left: 82%;
+  width: 8px;
+  height: 90%;
+}
 
 .strike-diag-1 {
-  top: 50%; left: 5%; width: 120%; height: 8px;
+  top: 50%;
+  left: 5%;
+  width: 120%;
+  height: 8px;
   transform: translateY(-50%) rotate(45deg);
   transform-origin: center;
 }
 
 .strike-diag-2 {
-  top: 50%; left: -15%; width: 120%; height: 8px;
+  top: 50%;
+  left: -15%;
+  width: 120%;
+  height: 8px;
   transform: translateY(-50%) rotate(-45deg);
   transform-origin: center;
 }
 
 @keyframes strikeDraw {
-  0% { opacity: 0; transform: scaleX(0); }
-  100% { opacity: 1; transform: scaleX(1); }
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 /* ==========================================================================
